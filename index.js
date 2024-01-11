@@ -37,19 +37,19 @@ const getWeatherDataPromise = (url) => {
 app.all('/', function(req,res) {
 	let city
 	if(req.method == 'GET'){
-		city = '588335'
+		city = 'Tartu'
 	} 
 	if(req.method == 'POST'){
 		city = req.body.cityname
 	}
 
-	let url = `https://api.openweathermap.org/data/2.5/weather?id=${city}&appid=${key}`
+	let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`
 	getWeatherDataPromise(url)
 	.then(data => {
 		res.render('index', data)
 	})
 	.catch(error => {
-		res.render.apply('index', {error: 'Problem with getting data, try again'})
+		res.render('index', {error: 'Problem with getting data, try again'})
 	})
 })
 
